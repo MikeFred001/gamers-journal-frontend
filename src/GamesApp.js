@@ -2,10 +2,19 @@ import { useState, useEffect } from "react";
 import SearchForm from "./SearchForm.js";
 import GiantBombApi from "./GiantBombApi.js";
 
-import Game from "./Game.js";
 import GamesList from "./GamesList.js";
-import axios from "axios";
 
+
+
+/** App, renders SearchForm and GamesList
+ *
+ * Props:
+ *  - None
+ *
+ * State:
+ *  - games: { data, isLoading }
+ *
+ * App -> GamesApp -> { SearchForm, GamesList }  */
 function GamesApp() {
   const [games, setGames] = useState({ data: [], isLoading: true });
 
@@ -41,8 +50,7 @@ function GamesApp() {
   return (
     <div className="GamesApp">
       < SearchForm filterList={ filterList } />
-      {/* < GamesList games={ games.data } /> */}
-      {/* < GamesList games={ games.data } /> */}
+      < GamesList games={ games.data } />
     </div>
   );
 }

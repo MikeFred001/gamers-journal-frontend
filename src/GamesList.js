@@ -1,9 +1,19 @@
+import Game from "./Game.js";
 
 
-function GamesList() {
+/** GamesList, renders Games
+ *
+ * Props:
+ *  - games: [ { id, name, releaseDate, description, platforms, image }, ... ]
+ *
+ * State:
+ *  - None
+ *
+ * GamesApp -> GamesList -> Game */
+function GamesList({ games }) {
   return (
     <div className="GamesList">
-      <p>GamesList</p>
+      { games.map(game => < Game key={ game.id } game={ game } />) }
     </div>
   );
 }
