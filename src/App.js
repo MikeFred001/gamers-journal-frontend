@@ -1,5 +1,6 @@
 import './App.css';
 import GamesApp from './GamesApp';
+// import RoutesList from './RoutesList';
 
 
 /** App, renders GamesApp
@@ -10,11 +11,12 @@ import GamesApp from './GamesApp';
  * State:
  *  - None
  *
- * root -> App -> { GamesApp }  */
+ * root -> App -> GamesApp  */
 function App() {
   return (
     <div className="App">
       < GamesApp />
+      {/* < RoutesList /> */}
     </div>
   );
 }
