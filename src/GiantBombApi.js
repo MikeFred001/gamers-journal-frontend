@@ -36,12 +36,17 @@ class GiantBombApi {
         return res;
     }
 
+    static async removeGame(id) {
+        const res = await this.request(`/games/${id}`, {}, "delete");
+        console.log("RESULT OF REMOVEGAME FRONTEND API>>>", res);
+        return res;
+    }
+
     static async getGames(id) {
         const res = await this.request(`/games/${id}`);
         console.log("RESULT OF GETGAMES FRONTEND API>>>", res);
         return res;
     }
-
 }
 
 export default GiantBombApi;

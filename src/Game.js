@@ -13,31 +13,25 @@ import GiantBombApi from "./GiantBombApi";
  *
  * GamesList -> Game */
 function Game({ game }) {
-
-    const [formData, setFormData] = useState(
-        {
-            id: game.id,
-            name: game.name,
-            releaseDate: game.releaseDate,
-            description: game.description,
-            platform: game.platforms[0],
+    const { platforms, ...restOfGame } = game;
+    const [formData, setFormData] = useState({
+            ...restOfGame,
+            platform: platforms[0],
             note: "",
-        }
-    );
+    });
 
     useEffect(() => {
-        console.log("FORM DATA", formData.note, formData.platform);
+        console.log("FORM DATA", formData);
+        console.log("GAME", game);
     });
 
     function handleChange(evt) {
         const { name, value } = evt.target;
-        setFormData(data => ({
-            ...data,
-            [name]: value
-        }));
+        setFormData(data => ({ ...data, [name]: value }));
     }
 
     async function handleSubmit(evt) {
+        evt.preventDefault();
         await GiantBombApi.saveGame(formData);
     }
 
@@ -58,7 +52,11 @@ function Game({ game }) {
                 <p>{game.releaseDate}</p>
                 <p>{game.description}</p>
 
-                <input placeholder="Note" name="note" onChange={handleChange}></input>
+                <input
+                    placeholder="Note"
+                    name="note"
+                    onChange={handleChange}>
+                </input>
 
                 <select name="platform" onChange={handleChange}>
                     {game.platforms.map((p, idx) =>

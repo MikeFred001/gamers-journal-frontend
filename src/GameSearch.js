@@ -13,8 +13,8 @@ import GamesList from "./GamesList.js";
  * State:
  *  - games: { data, isLoading }
  *
- * App -> GamesApp -> { SearchForm, GamesList }  */
-function GamesApp() {
+ * App -> GameSearch -> { SearchForm, GamesList }  */
+function GameSearch() {
     const [games, setGames] = useState({ data: [], isLoading: true });
 
     console.log("GAMES APP RENDERED");
@@ -54,4 +54,4 @@ function GamesApp() {
     );
 }
 
-export default GamesApp;
+export default GameSearch;

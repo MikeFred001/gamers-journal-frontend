@@ -1,5 +1,5 @@
 import './App.css';
-import GamesApp from './GamesApp';
+import GameSearch from './GameSearch';
 // import RoutesList from './RoutesList';
 
 
@@ -11,11 +11,11 @@ import GamesApp from './GamesApp';
  * State:
  *  - None
  *
- * root -> App -> GamesApp  */
+ * root -> App -> GameSearch  */
 function App() {
   return (
     <div className="App">
-      < GamesApp />
+      < GameSearch />
       {/* < RoutesList /> */}
     </div>
   );
