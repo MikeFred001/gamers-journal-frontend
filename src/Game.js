@@ -1,6 +1,6 @@
 import "./Game.css";
 import { useState, useEffect } from "react";
-import GiantBombApi from "./GiantBombApi";
+import GJApi from "./api";
 
 
 /** Game Component
@@ -15,11 +15,12 @@ import GiantBombApi from "./GiantBombApi";
 function Game({ game }) {
     const { platforms, ...restOfGame } = game;
     const [formData, setFormData] = useState({
-            ...restOfGame,
-            platform: platforms[0],
-            note: "",
+        ...restOfGame,
+        platform: platforms[0],
+        note: "",
     });
 
+    // Displays fully updated states post-render.
     useEffect(() => {
         console.log("FORM DATA", formData);
         console.log("GAME", game);
@@ -32,7 +33,7 @@ function Game({ game }) {
 
     async function handleSubmit(evt) {
         evt.preventDefault();
-        await GiantBombApi.saveGame(formData);
+        await GJApi.wishlistGame(formData);
     }
 
     const imageStyling = {
@@ -43,11 +44,20 @@ function Game({ game }) {
         margin: "25px 0px 5px"
     };
 
+    const imageDesc = game.imageUrl.includes("default")
+        ? `Default Giant Bomb placeholder image.`
+        : `Cover art for the game: ${game.title}`;
 
     return (
         <div className="Game">
             <form>
-                <img src={game.image} style={imageStyling}></img>
+                <img
+                    src={game.imageUrl}
+                    style={imageStyling}
+                    alt={imageDesc}
+                    title={imageDesc}
+                />
+
                 <p>{game.name}</p>
                 <p>{game.releaseDate}</p>
                 <p>{game.description}</p>
@@ -55,8 +65,8 @@ function Game({ game }) {
                 <input
                     placeholder="Note"
                     name="note"
-                    onChange={handleChange}>
-                </input>
+                    onChange={handleChange}
+                />
 
                 <select name="platform" onChange={handleChange}>
                     {game.platforms.map((p, idx) =>

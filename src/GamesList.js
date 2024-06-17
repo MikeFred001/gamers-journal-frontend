@@ -4,12 +4,12 @@ import Game from "./Game.js";
 /** GamesList, renders Games
  *
  * Props:
- *  - games: [ { id, name, releaseDate, description, platforms, image }, ... ]
+ *  - games: [ { id, name, releaseDate, description, platforms, imageUrl }, ... ]
  *
  * State:
  *  - None
  *
- * GamesApp -> GamesList -> Game */
+ * GameSearch -> GamesList -> Game */
 function GamesList({ games }) {
   return (
     <div className="GamesList">

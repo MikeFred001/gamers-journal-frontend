@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import SearchForm from "./SearchForm.js";
-import GiantBombApi from "./GiantBombApi.js";
+import GJApi from "./api.js";
 import GamesList from "./GamesList.js";
 
 
@@ -22,7 +22,7 @@ function GameSearch() {
 
     async function filterList(searchInput) {
         console.log("SEARCH TERM", searchInput);
-        const games = await GiantBombApi.searchGames(searchInput);
+        const games = await GJApi.searchGames(searchInput);
 
         setGames({ data: games, isLoading: false });
     }
