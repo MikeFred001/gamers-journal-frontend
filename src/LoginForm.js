@@ -9,7 +9,7 @@ import { useState } from 'react';
  *   - errorMessages: [ 'error message', ... ]
  *   - formData: { username, password }
  *
- * RoutesList -> LoginForm
+ * RoutesList -> [[ LoginForm ]]
  */
 function LoginForm({ login }) {
   const [errorMessages, setErrorMessages] = useState([]);

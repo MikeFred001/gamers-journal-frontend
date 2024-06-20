@@ -8,17 +8,13 @@ import userContext from './userContext';
  * State:
  *   - none
  *
- * App -> Navigation  */
+ * App -> [[ Navigation ]]  */
 
-// // Test user until userContext is implemented.
-// let user = { username: "testuser",
-//              firstName: "Joe",
-//              lastName: "Biden",
-//              email: "test@email.com" };
+// user = { username, firstName, lastName, email, isAdmin };
 
 function Navigation({ logout }) {
   const { user } = useContext(userContext);
-  console.log(`Navigation rendered, user is: ${user}`);
+  console.log('Navigation rendered, USER: \n', user);
 
   const activeStyle = {
     fontFamily: "Impact",
@@ -76,7 +72,7 @@ function Navigation({ logout }) {
 
         <NavLink
           className="Navigation-link"
-          to="/games"
+          to={`/games/${user.username}`}
           style={({ isActive }) => isActive ? activeStyle : undefined }>
             Wishlist
         </NavLink>

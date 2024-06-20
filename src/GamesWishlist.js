@@ -1,9 +1,7 @@
-import { useState, useEffect, useContext } from "react";
-import userContext from "./userContext";
-import GJApi from "./api";
-
-import SavedGame from "./SavedGame";
-import GamesList from "./GamesList";
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import GJApi from './api';
+import GamesList from './GamesList';
 
 
 /* Props:
@@ -11,28 +9,57 @@ import GamesList from "./GamesList";
  *
  * State:
  *   - savedGames [ { game }, ... ]
+ *     - game is : { id, name, releaseDate, description, platforms, imageUrl }
  *
- * RoutesList -> GamesWishlist -> SavedGame
+ * RoutesList -> [[ GamesWishlist ]] -> GamesList
  */
 function GamesWishlist() {
-  const user = useContext(userContext);
-  console.log(`USER CONTEXT WITHIN GAMESWISHLIST COMPONENT:\n${{ user }}`);
+  const { username } = useParams();
   const [savedGames, setSavedGames] = useState([]);
 
   useEffect(() => {
-    async function fetchGames() {
-      const games = await GJApi.getWishlistedGames(user.username);
-      console.log({ games });
-      setSavedGames(games);
+    async function fetchGamesOnMount() {
+      try {
+        const games = await GJApi.getWishlistedGames(username);
+        console.log('useEffect in GamesWishlist Component results: \n', games);
+        setSavedGames(games);
+      } catch (err) {
+        console.error("Failed to fetch wishlisted games:", err);
+        setSavedGames([]);
+      }
     }
-    console.log({ savedGames });
-    fetchGames();
-  }, []);
+    fetchGamesOnMount();
+    console.log(
+      'useEffect in GamesWishList \n savedGames State \n', savedGames,
+      '\n Params Username:', username
+    );
+  }, [username]);
 
+  async function deleteGame(id) {
+    try {
+      await GJApi.removeGame(id);
+      setSavedGames(savedGames.filter(g => g.id !== id));
+    } catch(err) {
+      console.error('ERROR: Failed to remove game', err);
+    }
+  }
+
+  async function editGame(id, gameData) {
+    try {
+      const updatedGame = await GJApi.updateGame(id, gameData);
+      setSavedGames(savedGames.map(g => g.id === id ? updatedGame : g));
+    } catch(err) {
+      console.error('ERROR in < GamesWishlist /> Failed to update game \n', err);
+    }
+  }
 
   return (
     <div className="GamesWishlist">
-      < GamesList games={ savedGames } />
+      < GamesList
+        games={savedGames}
+        editableDefault={false}
+        deleteGame={deleteGame}
+        editGame={editGame} />
     </div>
   );
 }

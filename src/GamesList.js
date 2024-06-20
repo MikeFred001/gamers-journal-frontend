@@ -1,19 +1,29 @@
-import Game from "./Game.js";
+import GameCard from "./GameCard.js";
 
 
 /** GamesList, renders Games
  *
  * Props:
- *  - games: [ { id, name, releaseDate, description, platforms, imageUrl }, ... ]
+ *  - games: [ { game }, { game }, ... ]
+ *    - game is : [ { id, name, releaseDate, description, platforms, imageUrl }, ... ]
  *
  * State:
  *  - None
  *
- * GameSearch -> GamesList -> Game */
-function GamesList({ games }) {
+ * { GameSearch, GamesWishlist }  -> [[ GamesList ]] -> { EditableGame, Game } */
+function GamesList({ games, editableDefault, addGame, editGame, deleteGame }) {
+  console.log('< GamesList /> GAMES: \n', games);
+
   return (
     <div className="GamesList">
-      { games.map(game => < Game key={ game.id } game={ game } />) }
+      {games.map(game =>
+        < GameCard
+          key={game.id}
+          game={game}
+          editableDefault={editableDefault}
+          addGame={addGame}
+          editGame={editGame}
+          deleteGame={deleteGame} />)}
     </div>
   );
 }

@@ -19,7 +19,7 @@ import SignupForm from "./SignupForm.js";
  * State:
  *  - none
  *
- * App -> RoutesList -> { CompanyList, JobList, CompanyDetail, Home }  */
+ * App -> [[ RoutesList ]] -> { Home, GameSearch, GamesWishlist, SignupForm, LoginForm }  */
 function RoutesList({ signup, login }) {
   const { user } = useContext(userContext);
 
@@ -27,10 +27,10 @@ function RoutesList({ signup, login }) {
     // user is logged in
     return (
       <Routes>
-        <Route path="/api/games" element={< GameSearch />} />
-        <Route path="/games"     element={< GamesWishlist />} />
-        <Route path="/"          element={< Home />} />
-        <Route path="*"          element={< Navigate to="/" />} />
+        <Route path="/api/games"       element={< GameSearch />} />
+        <Route path="/games/:username" element={< GamesWishlist />} />
+        <Route path="/"                element={< Home />} />
+        <Route path="*"                element={< Navigate to="/" />} />
         {/* <Route path="/profile"   element={< ProfileForm />} /> */}
       </Routes>
     );

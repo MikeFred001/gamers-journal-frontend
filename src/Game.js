@@ -1,81 +1,60 @@
-import "./Game.css";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import GJApi from "./api";
 
-
-/** Game Component
+/** SavedGame Component
  *
  * Props:
  *  - game: { id, name, releaseDate, description, platforms, image }
+ *  - editableDefault: boolean
  *
  * State:
- *  - None
+ *  - formData: { gameData, platform, note }
+ *  - isEditable: boolean
  *
- * GamesList -> Game */
-function Game({ game }) {
-    const { platforms, ...restOfGame } = game;
-    const [formData, setFormData] = useState({
-        ...restOfGame,
-        platform: platforms[0],
-        note: "",
-    });
+ * GameCard -> [[ SavedGame ]] */
+function Game({ game, toggleEdit, deleteGame }) {
 
-    // Displays fully updated states post-render.
-    useEffect(() => {
-        console.log("FORM DATA", formData);
-        console.log("GAME", game);
-    });
+  console.log('< Game /> GAME \n', game);
 
-    function handleChange(evt) {
-        const { name, value } = evt.target;
-        setFormData(data => ({ ...data, [name]: value }));
-    }
+  // Displays fully updated game state post-render.
+  useEffect(() => { console.log('< Game /> GAME \n', game); }, [game]);
 
-    async function handleSubmit(evt) {
-        evt.preventDefault();
-        await GJApi.wishlistGame(formData);
-    }
+  async function handleDelete(evt) {
+    evt.preventDefault();
+    deleteGame(game.id);
+  }
 
-    const imageStyling = {
-        width: "150px",
-        height: "200px",
-        borderRadius: "5px",
-        boxShadow: "0 0 5px 2px #ccc",
-        margin: "25px 0px 5px"
-    };
+  const imageStyling = {
+    width: '150px',
+    height: '200px',
+    borderRadius: '5px',
+    boxShadow: '0 0 5px 2px #ccc',
+    margin: '25px 0px 5px',
+  };
 
-    const imageDesc = game.imageUrl.includes("default")
-        ? `Default Giant Bomb placeholder image.`
-        : `Cover art for the game: ${game.title}`;
+  const imageDesc = game.imageUrl.includes('default')
+    ? `Default Giant Bomb placeholder image.`
+    : `Cover art for the game: ${game.title}.`;
 
-    return (
-        <div className="Game">
-            <form>
-                <img
-                    src={game.imageUrl}
-                    style={imageStyling}
-                    alt={imageDesc}
-                    title={imageDesc}
-                />
+  return (
+    <div className="Game">
+      <img
+        src={game.imageUrl}
+        style={imageStyling}
+        alt={imageDesc}
+        title={imageDesc}
+      />
 
-                <p>{game.name}</p>
-                <p>{game.releaseDate}</p>
-                <p>{game.description}</p>
+      <p>{game.name}</p>
+      <p>{game.releaseDate}</p>
+      <p>{game.description}</p>
+      <p>{game.preferredSystem}</p>
+      <p>{game.note}</p>
 
-                <input
-                    placeholder="Note"
-                    name="note"
-                    onChange={handleChange}
-                />
-
-                <select name="platform" onChange={handleChange}>
-                    {game.platforms.map((p, idx) =>
-                        <option key={idx} value={p}>{p}</option>)}
-                </select>
-                <button onClick={handleSubmit}>Save Game</button>
-            </form>
-        </div>
-    );
+      <button onClick={handleDelete}>Remove Game</button>
+      <button onClick={toggleEdit}>Edit</button>
+    </div>
+  );
 }
 
 export default Game;
