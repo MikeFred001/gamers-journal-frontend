@@ -64,6 +64,12 @@ function App() {
     localStorage.removeItem('userToken');
   }
 
+  async function addGame(username, formData) {
+    const newGame = await GJApi.wishlistGame(username, formData);
+    if (!newGame) throw new Error('Failed to add game to wishlist.');
+    console.log('New Game added to wishlist: \n', newGame);
+  }
+
 
   // TODO: Implement along with profile-edit functionality.
   // async function updateProfile(formData) {
@@ -79,7 +85,11 @@ function App() {
       < BrowserRouter >
         <div className="App">
           < Navigation logout={logout} />
-          < RoutesList user={user.data} login={login} signup={signup} />
+          < RoutesList
+            user={user.data}
+            login={login}
+            signup={signup}
+            addGame={addGame} />
         </div>
       </ BrowserRouter >
     </ userContext.Provider >

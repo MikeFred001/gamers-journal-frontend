@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import SavedGamesList from './SavedGamesList';
 import GJApi from './api';
-import GamesList from './GamesList';
 
 
 /* Props:
@@ -35,7 +35,7 @@ function GamesWishlist() {
     );
   }, [username]);
 
-  async function deleteGame(id) {
+  async function removeGame(id) {
     try {
       await GJApi.removeGame(id);
       setSavedGames(savedGames.filter(g => g.id !== id));
@@ -44,22 +44,9 @@ function GamesWishlist() {
     }
   }
 
-  async function editGame(id, gameData) {
-    try {
-      const updatedGame = await GJApi.updateGame(id, gameData);
-      setSavedGames(savedGames.map(g => g.id === id ? updatedGame : g));
-    } catch(err) {
-      console.error('ERROR in < GamesWishlist /> Failed to update game \n', err);
-    }
-  }
-
   return (
     <div className="GamesWishlist">
-      < GamesList
-        games={savedGames}
-        editableDefault={false}
-        deleteGame={deleteGame}
-        editGame={editGame} />
+      < SavedGamesList games={savedGames} removeGame={removeGame} />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
-import SearchForm from "./SearchForm.js";
-import GJApi from "./api.js";
-import GamesList from "./GamesList.js";
 import userContext from "./userContext.js";
+import SearchForm from "./SearchForm.js";
+import GamesList from "./GamesList.js";
+import GJApi from "./api.js";
 
 
 
@@ -13,30 +13,21 @@ import userContext from "./userContext.js";
  *
  * State:
  *  - games: { data, isLoading }
+ *    - game is : { id, name, releaseDate, description, platforms, imageUrl }
  *
- * App -> [[ GameSearch ]] -> { SearchForm, GamesList } */
-function GameSearch() {
-  const { user } = useContext(userContext);
+ * RoutesList -> [[ GameSearch ]] -> { SearchForm, GamesList } */
+function GameSearch({ addGame }) {
   const [games, setGames] = useState({ data: [], isLoading: true });
 
-  async function filterList(searchInput) {
+  async function searchGames(searchInput) {
     const games = await GJApi.searchGames(searchInput);
     setGames({ data: games, isLoading: false });
   }
 
-  async function addGame(formData) {
-    try {
-      const newGame = await GJApi.wishlistGame(user.username, formData);
-      console.log('New Game added to wishlist: \n', newGame);
-    } catch(err) {
-      console.error('ERROR in < GameSearch /> Failed to add game \n', err);
-    }
-  }
-
   return (
-    <div className="GamesApp">
-      < SearchForm filterList={filterList} />
-      < GamesList games={games.data} editableDefault={true} addGame={addGame} />
+    <div className="GameSearch">
+      < SearchForm searchGames={searchGames} />
+      < GamesList games={games.data} addGame={addGame} />
     </div>
   );
 }

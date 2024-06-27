@@ -44,7 +44,7 @@ function Navigation({ logout }) {
 
         <NavLink
           className="Navigation-link Navigation-signup"
-          to="/auth/register"
+          to="/register"
           style={({ isActive }) => isActive ? activeStyle : undefined }>
             Sign Up
         </NavLink>

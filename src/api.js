@@ -72,6 +72,13 @@ class GJApi {
     console.log('updateGame frontend API result \n', res);
     return res;
   }
+
+  static async getFeaturedGames() {
+    const res = await this.request('');
+    console.log('getFeaturedGames frontend API result \n', res);
+    return res;
+  }
 }
+
 
 export default GJApi;

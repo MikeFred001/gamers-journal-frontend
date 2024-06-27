@@ -20,16 +20,14 @@ import SignupForm from "./SignupForm.js";
  *  - none
  *
  * App -> [[ RoutesList ]] -> { Home, GameSearch, GamesWishlist, SignupForm, LoginForm }  */
-function RoutesList({ signup, login }) {
-  const { user } = useContext(userContext);
-
-  if (user != undefined) {
+function RoutesList({ user, signup, login, addGame }) {
+  if (user) {
     // user is logged in
     return (
       <Routes>
-        <Route path="/api/games"       element={< GameSearch />} />
+        <Route path="/api/games"       element={< GameSearch addGame={addGame} />} />
         <Route path="/games/:username" element={< GamesWishlist />} />
-        <Route path="/"                element={< Home />} />
+        <Route path="/"                element={< Home addGame={addGame}/>} />
         <Route path="*"                element={< Navigate to="/" />} />
         {/* <Route path="/profile"   element={< ProfileForm />} /> */}
       </Routes>
@@ -39,10 +37,10 @@ function RoutesList({ signup, login }) {
   // user is logged out
   return (
     <Routes>
-      <Route path="/auth/register" element={< SignupForm signup={signup}/>} />
-      <Route path="/login"         element={< LoginForm login={login} />} />
-      <Route path="/"              element={< Home />} />
-      <Route path="*"              element={< Navigate to="/" />} />
+      <Route path="/register" element={< SignupForm signup={signup}/>} />
+      <Route path="/login"    element={< LoginForm login={login} />} />
+      <Route path="/"         element={< Home addGame={addGame} />} />
+      <Route path="*"         element={< Navigate to="/" />} />
     </Routes>
   );
 }

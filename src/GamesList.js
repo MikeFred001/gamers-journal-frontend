@@ -1,29 +1,30 @@
-import GameCard from "./GameCard.js";
+import { useEffect } from "react";
+import Game from "./Game.js";
 
 
 /** GamesList, renders Games
  *
  * Props:
+ *  - addGame()
+ *  - toggleLoginNotice()
  *  - games: [ { game }, { game }, ... ]
  *    - game is : [ { id, name, releaseDate, description, platforms, imageUrl }, ... ]
  *
  * State:
  *  - None
  *
- * { GameSearch, GamesWishlist }  -> [[ GamesList ]] -> { EditableGame, Game } */
-function GamesList({ games, editableDefault, addGame, editGame, deleteGame }) {
-  console.log('< GamesList /> GAMES: \n', games);
+ * { Home, GameSearch } -> [[ GamesList ]] -> Game */
+function GamesList({ games, addGame, displayLoginNotice }) {
+  useEffect(() => console.log('< GamesList /> GAMES: \n', games), [games]);
 
   return (
     <div className="GamesList">
       {games.map(game =>
-        < GameCard
+        < Game
           key={game.id}
           game={game}
-          editableDefault={editableDefault}
           addGame={addGame}
-          editGame={editGame}
-          deleteGame={deleteGame} />)}
+          displayLoginNotice={displayLoginNotice} />)}
     </div>
   );
 }
