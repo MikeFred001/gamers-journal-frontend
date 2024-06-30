@@ -1,22 +1,17 @@
-import { useEffect } from "react";
 import Game from "./Game.js";
 
 
-/** GamesList, renders Games
- *
- * Props:
+/* Props:
  *  - addGame()
- *  - toggleLoginNotice()
+ *  - displayLoginNotice()
  *  - games: [ { game }, { game }, ... ]
- *    - game is : [ { id, name, releaseDate, description, platforms, imageUrl }, ... ]
+ *    - game: { id, title, releaseDate, description, platforms, imageUrl }
  *
  * State:
  *  - None
  *
- * { Home, GameSearch } -> [[ GamesList ]] -> Game */
+ * [ Home, GameSearch ] -> (( GamesList )) -> Game */
 function GamesList({ games, addGame, displayLoginNotice }) {
-  useEffect(() => console.log('< GamesList /> GAMES: \n', games), [games]);
-
   return (
     <div className="GamesList">
       {games.map(game =>

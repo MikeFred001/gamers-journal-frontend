@@ -1,22 +1,17 @@
 import { useState } from 'react';
 
 
-/**
- * Props:
+/* Props:
  *   - login()
  *
  * State:
- *   - errorMessages: [ 'error message', ... ]
+ *   - errorMessages: [ 'error message 1', ... ]
  *   - formData: { username, password }
  *
- * RoutesList -> [[ LoginForm ]]
- */
+ * App -> RoutesList -> (( LoginForm )) */
 function LoginForm({ login }) {
+  const [formData, setFormData] = useState({ username: '', password: '' });
   const [errorMessages, setErrorMessages] = useState([]);
-  const [formData, setFormData] = useState({
-    username: '',
-    password: ''
-  });
 
   function handleChange(evt) {
     const { name, value } = evt.target;

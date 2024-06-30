@@ -10,16 +10,14 @@ import GJApi from './api';
 
 const TOKEN_STORAGE_ID = 'GJ-Token';
 
-/** App Component
- *
- * Props:
+/* Props:
  *  - None
  *
  * State:
  *  - user: { data, infoLoaded }
  *  - token: string
  *
- * root -> [[ App ]] -> { Navigation, RoutesList }  */
+ * root -> (( App )) -> [ Navigation, RoutesList ]  */
 function App() {
   const [user, setUser] = useState({ data: null, infoLoaded: false });
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);

@@ -1,21 +1,17 @@
-import { useState, useContext } from "react";
-import userContext from "./userContext.js";
+import { useState } from "react";
 import SearchForm from "./SearchForm.js";
 import GamesList from "./GamesList.js";
 import GJApi from "./api.js";
 
 
-
-/** App, renders SearchForm and GamesList
- *
- * Props:
- *  - None
+/* Props:
+ *  - addGame()
  *
  * State:
- *  - games: { data, isLoading }
- *    - game is : { id, name, releaseDate, description, platforms, imageUrl }
+ *  - games: { data[], isLoading }
+ *    - game is : { id, title, releaseDate, description, platforms, imageUrl }
  *
- * RoutesList -> [[ GameSearch ]] -> { SearchForm, GamesList } */
+ * RoutesList -> (( GameSearch )) -> [ SearchForm, GamesList ] */
 function GameSearch({ addGame }) {
   const [games, setGames] = useState({ data: [], isLoading: true });
 

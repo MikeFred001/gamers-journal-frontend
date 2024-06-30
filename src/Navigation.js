@@ -2,26 +2,20 @@ import { NavLink, Link } from 'react-router-dom';
 import { useContext } from 'react';
 import userContext from './userContext';
 
+
 /* Props:
- *   - logout(): callback function to logout the user
+ *   - logout()
  *
  * State:
  *   - none
  *
- * App -> [[ Navigation ]]  */
-
-// user = { username, firstName, lastName, email, isAdmin };
-
+ * App -> (( Navigation )) -> [ NavLink, ... ]  */
 function Navigation({ logout }) {
   const { user } = useContext(userContext);
-  console.log('Navigation rendered, USER: \n', user);
 
   const activeStyle = {
     fontFamily: "Impact",
     color: "red",
-    border: "1px solid red",
-    borderRadius: "5px",
-    padding: "1px"
   };
 
   if (user == undefined) {

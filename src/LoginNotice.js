@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
  * State:
  *  - None
  *
- * RoutesList -> Home -> [[ LoginNotice ]] */
+ * RoutesList -> Home -> (( LoginNotice )) */
 function LoginNotice({ closeLoginNotice }) {
 
   const styling = {

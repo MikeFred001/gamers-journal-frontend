@@ -1,19 +1,16 @@
 import './SavedGame.css';
 import { useEffect } from "react";
 
-/** SavedGame Component
- *
- * Props:
- *  - game: { id, name, releaseDate, description, preferredSystem, imagUrl }
+//TODO: Add dateAdded to game object to allow for sorting by recency.
+/* Props
+ *  - game: { id, name, releaseDate, description, preferredSystem, imageUrl }
  *  - removeGame()
  *
- * State:
- *  - formData: { gameData, platform, note }
- *  - isEditable: boolean
+ * State
+ *   - None
  *
- * GamesWishlist -> GamesList -> [[ SavedGame ]] */
+ * GamesWishlist -> SavedGamesList -> (( SavedGame )) */
 function SavedGame({ game, removeGame }) {
-  console.log('< SavedGame /> GAME \n', game);
 
   async function handleDelete() {
     try {
@@ -53,7 +50,10 @@ function SavedGame({ game, removeGame }) {
       <p>{game.name}</p>
       <p>{game.releaseDate}</p>
       <p>{game.description}</p>
-      <p>{game.preferredSystem}</p>
+
+      {game.preferredSystem
+        ? <p>{game.preferredSystem}</p>
+        : null}
 
       <button onClick={handleDelete}>Remove</button>
     </div>

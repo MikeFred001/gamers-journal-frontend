@@ -1,16 +1,14 @@
 import { useState } from 'react';
 
 
-/**
- * Props:
- *  - signup()
+/* Props:
+ *   - signup()
  *
  * State:
- * - errorMessages: [ 'error message', ... ]
- * - formData: { username, password, confirmPassword, firstName, lastName, email }
+ *   - errorMessages: [ 'error message', ... ]
+ *   - formData: { username, password, confirmPassword, firstName, lastName, email }
  *
- * RoutesList -> SignupForm
- */
+ * App -> RoutesList -> (( SignupForm )) */
 function SignupForm({ signup }) {
   const [errorMessages, setErrorMessages] = useState([]);
   const [formData, setFormData] = useState({
@@ -35,7 +33,7 @@ function SignupForm({ signup }) {
 
     if (password !== confirmPassword) {
       errors.push('Passwords do not match.');
-      }
+    }
 
     if (password !== password.trim()) {
       errors.push('Password cannot start or end with whitespace.');
@@ -45,9 +43,10 @@ function SignupForm({ signup }) {
       setErrorMessages(errors);
       return;
     }
+
     try {
       await signup({ password, ...restOfFormData });
-    } catch(err) {
+    } catch (err) {
       setErrorMessages(err);
     }
   }
@@ -59,7 +58,7 @@ function SignupForm({ signup }) {
     margin: 'auto'
   };
 
-  return(
+  return (
     <div className="SignupForm">
       <form onSubmit={handleSubmit} style={formStyling}>
         <input
@@ -124,14 +123,13 @@ function SignupForm({ signup }) {
           onChange={handleChange}
         />
         <button>Sign Up</button>
-        {
-        errorMessages.length > 0
-          ? errorMessages.map((errorMsg, idx) => <p key={idx}>{errorMsg}</p>)
-          : null
-        }
       </form>
+
+      {errorMessages.length > 0
+        ? errorMessages.map((errorMsg, idx) => <p key={idx}>{errorMsg}</p>)
+        : null}
     </div>
-  )
+  );
 }
 
 export default SignupForm;

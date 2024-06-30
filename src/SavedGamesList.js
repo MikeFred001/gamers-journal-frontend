@@ -1,15 +1,15 @@
 import SavedGame from './SavedGame.js';
 
 
-/* Props:
- *   - games: [ { game }, ... ]
-*      - game is : { id, name, releaseDate, description, platforms, imageUrl }
+/* Props
+ *   - removeGame()
+ *   - games: [ { game }, { game } ... ]
+ *     - game is : { id, name, releaseDate, description, platforms, imageUrl }
  *
- * State:
+ * State
  *   - None
  *
- * GamesWishlist -> [[ SavedGamesList ]] -> SavedGame
- */
+ * GamesWishlist -> (( SavedGamesList )) -> SavedGame */
 function SavedGamesList({ games, removeGame }) {
   return (
     <div className="SavedGamesList">

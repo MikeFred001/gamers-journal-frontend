@@ -4,7 +4,7 @@ import userContext from './userContext';
 /** SavedGame Component
  *
  * Props:
- *  - game: { id, name, releaseDate, description, platforms, imageUrl }
+ *  - game: { id, title, releaseDate, description, platforms[], imageUrl }
  *  - addGame()
  *  - displayLoginNotice()
  *
@@ -13,10 +13,11 @@ import userContext from './userContext';
  *  - isSaving: boolean
  *  - saveComplete: boolean
  *
- * { Home, GameSearch } -> GamesList -> [[ Game ]] */
+ * [ Home, GameSearch ] -> GamesList -> (( Game )) */
 function Game({ game, addGame, displayLoginNotice }) {
   const { user } = useContext(userContext);
   const { platforms, ...restOfGame } = game;
+
   const [formData, setFormData] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
   const [saveComplete, setSaveComplete] = useState(false);
@@ -43,7 +44,7 @@ function Game({ game, addGame, displayLoginNotice }) {
     console.log('\n TOGGLESAVEMODE IN GAME COMPONENT \n',);
     if (!user) {
       console.log('User not logged in, showing login notice.');
-      displayLoginNotice(false);
+      displayLoginNotice();
       return;
     }
 
@@ -83,11 +84,13 @@ function Game({ game, addGame, displayLoginNotice }) {
         <form>
           <input placeholder='Note' name='note' onChange={handleChange}/>
 
-          <select name='preferredSystem' onChange={handleChange}>
-            <option value=''>--Preferred System--</option>
-            {game.platforms.map((p, idx) =>
-              <option key={idx} value={p}>{p}</option>)}
-          </select>
+          {game.platforms.length > 0 && (
+            <select name='preferredSystem' onChange={handleChange}>
+              <option value=''>Preferred System</option>
+              {game.platforms.map((p, idx) =>
+                <option key={idx} value={p}>{p}</option>)}
+            </select>
+          )}
 
           <button onClick={handleSave}>Save Game</button>
           <button onClick={toggleSaveMode}>Cancel</button>
@@ -108,7 +111,9 @@ function Game({ game, addGame, displayLoginNotice }) {
       <p>{game.name}</p>
       <p>{game.releaseDate}</p>
       <p>{game.description}</p>
-      <p>{`Available on: ${game.platforms.join(', ')}`}</p>
+      {game.platforms.length > 0 && (
+        <p>{`Available on: ${game.platforms.join(', ')}`}</p>
+      )}
 
       {saveComplete
         ? <p>Game Saved!</p>

@@ -8,37 +8,31 @@ import GJApi from './api';
  *   - None
  *
  * State:
- *   - savedGames [ { game }, ... ]
- *     - game is : { id, name, releaseDate, description, platforms, imageUrl }
+ *   - games [ { game }, { game } ... ]
+ *     - game: { id, title, releaseDate, description, platforms, imageUrl }
  *
- * RoutesList -> [[ GamesWishlist ]] -> GamesList
- */
+ * RoutesList -> (( GamesWishlist )) -> SavedGamesList */
 function GamesWishlist() {
   const { username } = useParams();
-  const [savedGames, setSavedGames] = useState([]);
+  const [games, setGames] = useState([]);
 
   useEffect(() => {
     async function fetchGamesOnMount() {
       try {
         const games = await GJApi.getWishlistedGames(username);
-        console.log('useEffect in GamesWishlist Component results: \n', games);
-        setSavedGames(games);
+        setGames(games);
       } catch (err) {
         console.error("Failed to fetch wishlisted games:", err);
-        setSavedGames([]);
+        setGames([]);
       }
     }
     fetchGamesOnMount();
-    console.log(
-      'useEffect in GamesWishList \n savedGames State \n', savedGames,
-      '\n Params Username:', username
-    );
   }, [username]);
 
   async function removeGame(id) {
     try {
       await GJApi.removeGame(id);
-      setSavedGames(savedGames.filter(g => g.id !== id));
+      setGames(games.filter(g => g.id !== id));
     } catch(err) {
       console.error('ERROR: Failed to remove game', err);
     }
@@ -46,7 +40,7 @@ function GamesWishlist() {
 
   return (
     <div className="GamesWishlist">
-      < SavedGamesList games={savedGames} removeGame={removeGame} />
+      < SavedGamesList games={games} removeGame={removeGame} />
     </div>
   );
 }
