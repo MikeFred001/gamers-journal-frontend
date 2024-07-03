@@ -1,14 +1,14 @@
 import { useState } from 'react';
+import Alert from './Alert';
 
-
-/* Props:
+/* PROPS
  *   - signup()
  *
- * State:
+ * STATE
  *   - errorMessages: [ 'error message', ... ]
  *   - formData: { username, password, confirmPassword, firstName, lastName, email }
  *
- * App -> RoutesList -> (( SignupForm )) */
+ * RoutesList -> (( SignupForm )) -> Alert */
 function SignupForm({ signup }) {
   const [errorMessages, setErrorMessages] = useState([]);
   const [formData, setFormData] = useState({
@@ -39,15 +39,10 @@ function SignupForm({ signup }) {
       errors.push('Password cannot start or end with whitespace.');
     }
 
-    if (errors.length > 0) {
-      setErrorMessages(errors);
-      return;
-    }
-
     try {
       await signup({ password, ...restOfFormData });
     } catch (err) {
-      setErrorMessages(err);
+      setErrorMessages([...errors, ...err]);
     }
   }
 
@@ -72,8 +67,7 @@ function SignupForm({ signup }) {
         />
 
         <input
-          //TODO: Uncomment password type once testing is done.
-          // type="password"
+          type="password"
           id="password"
           name="password"
           placeholder="Password"
@@ -83,8 +77,7 @@ function SignupForm({ signup }) {
         />
 
         <input
-          //TODO: Uncomment password type once testing is done.
-          // type="password"
+          type="password"
           id="confirm-password"
           name="confirmPassword"
           autoComplete="confirm-password"
@@ -105,7 +98,7 @@ function SignupForm({ signup }) {
 
         <input
           type="text"
-          id="lastName"
+          id="last-name"
           name="lastName"
           placeholder="Last Name"
           autoComplete="last-name"
@@ -126,7 +119,8 @@ function SignupForm({ signup }) {
       </form>
 
       {errorMessages.length > 0
-        ? errorMessages.map((errorMsg, idx) => <p key={idx}>{errorMsg}</p>)
+        ? errorMessages.map((message, idx) =>
+            <Alert key={idx} message={message.replace('instance.', '')} />)
         : null}
     </div>
   );

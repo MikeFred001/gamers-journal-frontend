@@ -1,12 +1,18 @@
 import './SavedGame.css';
 import { useEffect } from "react";
 
-//TODO: Add dateAdded to game object to allow for sorting by recency.
-/* Props
- *  - game: { id, name, releaseDate, description, preferredSystem, imageUrl }
+
+/* PROPS
+ *  - game: { id,
+              name,
+              releaseDate,
+              description,
+              preferredSystem,
+              imageUrl,
+              dateAdded }
  *  - removeGame()
  *
- * State
+ * STATE
  *   - None
  *
  * GamesWishlist -> SavedGamesList -> (( SavedGame )) */

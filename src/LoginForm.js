@@ -1,14 +1,15 @@
 import { useState } from 'react';
+import Alert from './Alert';
 
 
-/* Props:
+/* PROPS
  *   - login()
  *
- * State:
+ * STATE
  *   - errorMessages: [ 'error message 1', ... ]
  *   - formData: { username, password }
  *
- * App -> RoutesList -> (( LoginForm )) */
+ * RoutesList -> (( LoginForm )) -> Alert */
 function LoginForm({ login }) {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [errorMessages, setErrorMessages] = useState([]);
@@ -30,7 +31,6 @@ function LoginForm({ login }) {
   return(
     <div className="LoginForm">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
         <input
           type="text"
           id="username"
@@ -40,7 +40,6 @@ function LoginForm({ login }) {
           onChange={handleChange}
         />
 
-        <label htmlFor="password">Password</label>
         <input
           type="password"
           id="password"
@@ -50,8 +49,12 @@ function LoginForm({ login }) {
           onChange={handleChange}
         />
         <button>Login</button>
-        {/* TODO: Handle form alerts */}
       </form>
+
+      {errorMessages.length > 0
+        ? errorMessages.map((message, idx) =>
+            <Alert key={idx} message={message.replace('instance.', '')} />)
+        : null}
     </div>
   )
 }

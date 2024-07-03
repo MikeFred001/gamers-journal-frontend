@@ -1,14 +1,12 @@
 import { useState, useContext } from "react";
 import userContext from './userContext';
 
-/** SavedGame Component
- *
- * Props:
+/* PROPS
  *  - game: { id, title, releaseDate, description, platforms[], imageUrl }
  *  - addGame()
  *  - displayLoginNotice()
  *
- * State:
+ * STATE
  *  - formData: { ...gameData, platform, note }
  *  - isSaving: boolean
  *  - saveComplete: boolean

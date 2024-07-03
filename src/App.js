@@ -10,10 +10,10 @@ import GJApi from './api';
 
 const TOKEN_STORAGE_ID = 'GJ-Token';
 
-/* Props:
+/* PROPS
  *  - None
  *
- * State:
+ * STATE
  *  - user: { data, infoLoaded }
  *  - token: string
  *

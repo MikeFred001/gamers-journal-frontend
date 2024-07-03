@@ -4,10 +4,10 @@ import SavedGamesList from './SavedGamesList';
 import GJApi from './api';
 
 
-/* Props:
+/* PROPS
  *   - None
  *
- * State:
+ * STATE
  *   - games [ { game }, { game } ... ]
  *     - game: { id, title, releaseDate, description, platforms, imageUrl }
  *

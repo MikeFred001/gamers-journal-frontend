@@ -3,10 +3,10 @@ import { useContext } from 'react';
 import userContext from './userContext';
 
 
-/* Props:
+/* PROPS
  *   - logout()
  *
- * State:
+ * STATE
  *   - none
  *
  * App -> (( Navigation )) -> [ NavLink, ... ]  */

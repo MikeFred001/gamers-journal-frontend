@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
 
-/** LoginNotice
- *
- * Props:
+/* PROPS
  *  - closeLoginNotice()
  *
- * State:
+ * STATE
  *  - None
  *
  * RoutesList -> Home -> (( LoginNotice )) */

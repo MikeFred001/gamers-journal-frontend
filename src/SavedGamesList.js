@@ -1,12 +1,13 @@
 import SavedGame from './SavedGame.js';
 
 
-/* Props
- *   - removeGame()
- *   - games: [ { game }, { game } ... ]
- *     - game is : { id, name, releaseDate, description, platforms, imageUrl }
+/* PROPS
+ * - removeGame()
+ * - sortByDate()
+ * - games: [ { game }, { game } ... ]
+ *   - game is : { id, name, releaseDate, description, platforms, imageUrl, dateAdded }
  *
- * State
+ * STATE
  *   - None
  *
  * GamesWishlist -> (( SavedGamesList )) -> SavedGame */

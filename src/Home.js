@@ -5,10 +5,10 @@ import LoginNotice from './LoginNotice';
 import GJApi from './api';
 
 
-/* Props:
+/* PROPS
  *   - addGame()
  *
- * State:
+ * STATE
  *   - games [ { game }, { game } ... ]
  *     - game: { id, title, releaseDate, description, platforms, imageUrl }
  *

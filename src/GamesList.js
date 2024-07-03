@@ -1,13 +1,13 @@
 import Game from "./Game.js";
 
 
-/* Props:
+/* PROPS
  *  - addGame()
  *  - displayLoginNotice()
  *  - games: [ { game }, { game }, ... ]
  *    - game: { id, title, releaseDate, description, platforms, imageUrl }
  *
- * State:
+ * STATE
  *  - None
  *
  * [ Home, GameSearch ] -> (( GamesList )) -> Game */

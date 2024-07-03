@@ -3,9 +3,6 @@ import axios from "axios";
 const BASE_URL = "http://localhost:3001";
 
 
-/** Gamer's Journal Api Class
- *  Provides methods to interact with the Gamer's Journal Backend API
- */
 class GJApi {
   static token = undefined;
 
@@ -22,6 +19,8 @@ class GJApi {
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
       console.error("API Error:", err.response);
+      let message = err.response.data.error.message;
+      throw Array.isArray(message) ? message : [message];
     }
   }
 

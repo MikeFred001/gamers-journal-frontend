@@ -7,13 +7,13 @@ import SignupForm from "./SignupForm.js";
 // import ProfileForm from "./ProfileForm.js"; TODO: Implement and uncomment
 
 
-/* Props:
+/* PROPS
  *  - user: { username, firstName, lastName, email, isAdmin }
  *  - login()
  *  - signup()
  *  - addGame()
  *
- * State:
+ * STATE
  *  - none
  *
  * App ->

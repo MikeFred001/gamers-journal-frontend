@@ -4,10 +4,10 @@ import GamesList from "./GamesList.js";
 import GJApi from "./api.js";
 
 
-/* Props:
+/* PROPS
  *  - addGame()
  *
- * State:
+ * STATE
  *  - games: { data[], isLoading }
  *    - game is : { id, title, releaseDate, description, platforms, imageUrl }
  *
